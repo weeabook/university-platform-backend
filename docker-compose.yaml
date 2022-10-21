@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  database_service:
+    container_name: database_service
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=weeabookpassword123
+      - POSTGRES_USER=root
+    image: postgres:15.0-alpine
