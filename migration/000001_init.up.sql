@@ -11,27 +11,28 @@ CREATE TABLE users (
 );
 
 CREATE TABLE roles (
-    id        SERIAL NOT NULL UNIQUE,
-    role_name TEXT NOT NULL UNIQUE
+    id   SERIAL NOT NULL UNIQUE,
+    name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE news (
     id         SERIAL NOT NULL UNIQUE,
-    img_url    TEXT NOT NULL,
+    img_url    TEXT,
     title      TEXT NOT NULL,
     content    TEXT NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
-CREATE TABLE comments (
+CREATE TABLE appeals (
     id      SERIAL NOT NULL UNIQUE,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE NOT NULL,
     title   TEXT NOT NULL,
     content TEXT NOT NULL
 );
 
 CREATE TABLE categories (
-    id      SERIAL NOT NULL UNIQUE,
-    content TEXT NOT NULL UNIQUE
+    id   SERIAL NOT NULL UNIQUE,
+    name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE groups (
@@ -68,10 +69,4 @@ CREATE TABLE news_category (
     id          SERIAL NOT NULL UNIQUE,
     news_id     INT REFERENCES news(id) ON DELETE CASCADE NOT NULL UNIQUE,
     category_id INT REFERENCES categories(id) ON DELETE CASCADE NOT NULL
-);
-
-CREATE TABLE user_comments (
-    id         SERIAL NOT NULL UNIQUE,
-    user_id    INT REFERENCES users(id) ON DELETE CASCADE NOT NULL UNIQUE,
-    comment_id INT REFERENCES comments(id) ON DELETE CASCADE NOT NULL UNIQUE
 );
