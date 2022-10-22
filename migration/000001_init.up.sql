@@ -6,7 +6,8 @@ CREATE TABLE users (
     surname       TEXT NOT NULL,
     patronymic    TEXT,
     email         TEXT NOT NULL,
-    password_hash TEXT NOT NULL
+    password_hash TEXT NOT NULL,
+    recordbook    INT
 );
 
 CREATE TABLE roles (
@@ -33,12 +34,34 @@ CREATE TABLE categories (
     content TEXT NOT NULL UNIQUE
 );
 
+CREATE TABLE groups (
+    id      SERIAL NOT NULL UNIQUE,
+    content TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE lessons (
+    id         SERIAL NOT NULL UNIQUE,
+    group_id   INT REFERENCES groups(id) ON DELETE CASCADE NOT NULL UNIQUE,
+    up_week    BOOLEAN NOT NULL,
+    week_day   INT NOT NULL,
+    time_start TIME NOT NULL,
+    time_end   TIME NOT NULL,
+    classroom  TEXT NOT NULL,
+    subject    TEXT NOT NULL
+);
+
 -- Link tables
 
 CREATE TABLE user_role (
     id      SERIAL NOT NULL UNIQUE,
     user_id INT REFERENCES users(id) ON DELETE CASCADE NOT NULL UNIQUE,
     role_id INT REFERENCES roles(id) ON DELETE CASCADE NOT NULL UNIQUE
+);
+
+CREATE TABLE user_group (
+    id       SERIAL NOT NULL UNIQUE,
+    user_id  INT REFERENCES users(id) ON DELETE CASCADE NOT NULL UNIQUE,
+    group_id INT REFERENCES users(id) ON DELETE CASCADE NOT NULL
 );
 
 CREATE TABLE news_category (

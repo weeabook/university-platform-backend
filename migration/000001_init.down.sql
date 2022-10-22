@@ -12,9 +12,15 @@ DROP TABLE valid_emails;
 
 DROP TABLE categories;
 
+DROP TABLE groups;
+
+DROP TABLE lessons;
+
 -- Link tables
 
 DROP TABLE user_role;
+
+DROP TABLE user_group;
 
 DROP TABLE news_category;
 
