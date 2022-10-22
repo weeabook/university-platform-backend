@@ -8,7 +8,7 @@ type User struct {
 	Email      string `json:"email" db:"email"`
 	Password   string `json:"password" db:"password_hash"`
 	Recordbook int    `json:"recordbook" db:"recordbook"`
-	Role       string `json:"role" db:"-"`
+	RoleId     string `json:"role_id" db:"-"`
 }
 
 type InputUser struct {

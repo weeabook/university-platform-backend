@@ -15,6 +15,14 @@ type Config struct {
 		BindIP string `env:"BIND_IP" env-default:"0.0.0.0"`
 		Port   string `env:"PORT" env-default:"10000"`
 	}
+	DatabaseConfig struct {
+		Host     string `env:"PG_HOST" env-required:"true"`
+		Port     string `env:"PG_PORT" env-required:"true"`
+		Username string `env:"PG_USERNAME" env-required:"true"`
+		DBName   string `env:"DB_NAME" env-required:"true"`
+		SSLMode  string `env:"SSL_MODE" env-default:"false"`
+		Password string `env:"PG_PASSWORD" env-required:"true"`
+	}
 	AppConfig struct {
 		LogLevel  string
 		AdminUser struct {
