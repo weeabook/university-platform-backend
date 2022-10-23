@@ -1,14 +1,17 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/jmoiron/sqlx"
+	"github.com/weeabook/src/university-platform-backend/internal/model"
+)
 
 type TimeTableRepo struct {
 	db *sqlx.DB
 }
 
-func (t TimeTableRepo) GetAll() ([]string, error) {
-	var result []string
-	err := t.db.Select(&result, "SELECT filename from schedulefile")
+func (t TimeTableRepo) GetAll() ([]model.TimeTable, error) {
+	var result []model.TimeTable
+	err := t.db.Select(&result, "SELECT * from schedulefile")
 	if err != nil {
 		return nil, err
 	}

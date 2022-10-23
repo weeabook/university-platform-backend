@@ -30,7 +30,7 @@ type RoleRepository interface {
 }
 
 type TimetableRepository interface {
-	GetAll() ([]string, error)
+	GetAll() ([]model.TimeTable, error)
 	GetByGroup(group int) (string, error)
 }
 

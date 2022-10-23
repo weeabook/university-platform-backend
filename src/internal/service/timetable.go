@@ -1,6 +1,9 @@
 package service
 
-import "github.com/weeabook/src/university-platform-backend/internal/repository"
+import (
+	"github.com/weeabook/src/university-platform-backend/internal/model"
+	"github.com/weeabook/src/university-platform-backend/internal/repository"
+)
 
 type TimetableServiceImpl struct {
 	repo repository.TimetableRepository
@@ -10,7 +13,7 @@ func NewTimetableServiceImpl(repo repository.TimetableRepository) *TimetableServ
 	return &TimetableServiceImpl{repo: repo}
 }
 
-func (t TimetableServiceImpl) GetAll() ([]string, error) {
+func (t TimetableServiceImpl) GetAll() ([]model.TimeTable, error) {
 	return t.repo.GetAll()
 }
 
