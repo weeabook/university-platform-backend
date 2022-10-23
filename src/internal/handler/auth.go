@@ -41,3 +41,20 @@ func (h *Handler) Login(c *gin.Context) {
 	SendJSONResponse(c, "token", token)
 
 }
+
+func (h *Handler) getUserInfo(c *gin.Context) {
+	id, err := getUserId(c)
+	if err != nil {
+		logrus.Error(err)
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	user, err := h.services.AuthService.GetUserInfo(id)
+	if err != nil {
+		logrus.Error(err)
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	user.Password = ""
+	SendJSONResponse(c, "user", user)
+}

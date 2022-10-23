@@ -22,6 +22,10 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	api := router.Group("/")
 	{
+		profile := api.Group("/profile", h.userIdentity)
+		{
+			profile.GET("/", h.getUserInfo)
+		}
 		appeal := api.Group("/rector-appeal", h.userIdentity)
 		{
 			appeal.POST("/rector-appeal", h.newAppeal)
