@@ -19,9 +19,9 @@ func (r *AuthRepo) CreateUser(user model.User) (int, error) {
 	var args []any
 	var userId int
 
-	fields := "username, surname, email, password_hash"
-	values := "$1, $2, $3"
-	args = append(args, user.Name, user.Surname, user.Email, user.Password)
+	fields := "username, surname, email, password_hash, group_id, group_name"
+	values := "$1, $2, $3, $4, $5"
+	args = append(args, user.Name, user.Surname, user.Email, user.Password, user.GroupId, user.GroupName)
 
 	if user.Patronymic != "" {
 		fields = fields + ", patronymic"
