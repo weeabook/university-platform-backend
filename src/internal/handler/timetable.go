@@ -3,9 +3,10 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
+	"io"
 	"net/http"
+	"os"
 	"strconv"
-	"strings"
 )
 
 func (h *Handler) getAllTimeTables(c *gin.Context) {
@@ -31,5 +32,13 @@ func (h *Handler) getByGroup(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	http.ServeFile(c.Writer, c.Request, "../../uploads/"+strings.Split(timetable, "/")[1])
+	c.Writer.Header().Set("Content-Disposition", "attachment; filename="+timetable)
+	c.Writer.Header().Set("Content-Type", c.Request.Header.Get("Content-Type"))
+	file, err := os.Open("./" + timetable)
+	if err != nil {
+		logrus.Error(err)
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	io.Copy(c.Writer, file)
 }
