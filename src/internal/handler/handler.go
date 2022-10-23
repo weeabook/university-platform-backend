@@ -28,7 +28,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		}
 		appeal := api.Group("/rector-appeal", h.userIdentity)
 		{
-			appeal.POST("/rector-appeal", h.newAppeal)
+			appeal.POST("/", h.newAppeal)
 		}
 
 		news := api.Group("/news")
