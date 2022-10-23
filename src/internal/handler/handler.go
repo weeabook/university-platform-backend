@@ -36,6 +36,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 		timetable := api.Group("/timetable", h.userIdentity)
 		{
+			timetable.GET("/")
 			timetable.GET("/:group")
 		}
 	}

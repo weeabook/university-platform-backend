@@ -30,7 +30,8 @@ type RoleRepository interface {
 }
 
 type TimetableRepository interface {
-	// TODO
+	GetAll() ([]string, error)
+	GetByGroup(group int) (string, error)
 }
 
 type Repository struct {
@@ -49,6 +50,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		CategoryRepository:  NewCategoryRepo(db),
 		NewsRepository:      NewNewsRepo(db),
 		RoleRepository:      NewRoleRepo(db),
-		TimetableRepository: nil,
+		TimetableRepository: NewTimeTableRepo(db),
 	}
 }

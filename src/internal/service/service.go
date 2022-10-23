@@ -31,7 +31,8 @@ type RoleService interface {
 }
 
 type TimetableService interface {
-	// TODO
+	GetAll() ([]string, error)
+	GetByGroup(group int) (string, error)
 }
 
 type Service struct {

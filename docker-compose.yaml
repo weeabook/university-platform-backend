@@ -9,3 +9,21 @@ services:
       - POSTGRES_PASSWORD=weeabookpassword123
       - POSTGRES_USER=admin
     image: postgres:15.0-alpine
+
+    volumes:
+      - ../2. Init Database:/docker-entrypoint-initdb.d
+      - .:/var/lib/postgresql/data
+  migrate:
+    image: migrate/migrate
+    links:
+      - database_service
+      -
+  web:
+    build: .
+    command: ./main
+    ports:
+      - "8080:8080"
+    links:
+      - database_service
+    depends_on:
+      - database_service
